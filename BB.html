@@ -5,7 +5,30 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bistro Babushka</title>
+
     <style>
+       /* body {
+ background-color: skyblue;
+ }*/
+
+        main {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        }
+
+        article {
+            border: 1px solid red;
+            border-radius: 20px;
+            padding: 8px;
+            margin: 1rem;
+            text-align: center;
+        }
+
+        img {
+            max-width: 100%;
+            align-items: center;
+            border-radius: 5%;
+        }
     </style>
 </head>
 
@@ -36,7 +59,7 @@
         console.log("Siden er loaded");
 
         const url = "https://babushka-dd8a.restdb.io/rest/menu";
-        const medieurl = "https://babushka-dd8a.restdb.io/media";
+        const medieurl = "https://babushka-dd8a.restdb.io/media/";
         const options = {
             headers: {
                 'x-apikey': " 600ec2fb1346a1524ff12de4"
