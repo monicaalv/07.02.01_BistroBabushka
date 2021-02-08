@@ -11,6 +11,26 @@
 
 <body>
 
+
+    <main></main>
+
+    <template>
+        <article>
+            <img src="" alt="" class="billede">
+            <h2 class="navn"></h2>
+            <p class="kategori"></p>
+            <p class="kortBeskrivelse"></p>
+            <p class="LangBeskrivelse"></p>
+            <p class="oprindelse"></p>
+            <p class="pris"></p>
+        </article>
+    </template>
+
+
+
+
+
+
     <script>
         document.addEventListener("DOMContentLoaded", hentData)
         console.log("Siden er loaded");
@@ -29,8 +49,23 @@
             vis(json);
         }
 
+        const main = document.querySelector("main");
+        const template = document.querySelector("template").content;
+
         function vis(json) {
             console.log(json);
+            json.forEach(madret => {
+                const klon = template.cloneNode(true);
+                klon.querySelector(".billede").src = medieurl + madret.billede;
+                klon.querySelector(".navn").textContent = madret.navn;
+                klon.querySelector(".kategori").textContent = madret.kategori;
+                klon.querySelector(".kortBeskrivelse").textContent = madret.kortbeskrivelse;
+                klon.querySelector(".LangBeskrivelse").textContent = madret.langbeskrivelse;
+                klon.querySelector(".oprindelse").textContent = madret.oprindelsesregion;
+                klon.querySelector(".pris").textContent = madret.pris;
+                main.appendChild(klon);
+
+            })
         }
     </script>
 </body></html>
