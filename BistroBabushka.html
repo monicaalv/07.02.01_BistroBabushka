@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bistro Babushka</title>
+
+
+    <style>
+        #liste {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        }
+
+        article {
+            border: 1px solid red;
+            border-radius: 20px;
+            padding: 8px;
+            margin: 1rem;
+            text-align: center;
+            box-shadow: 19px 13px 26px 1px rgba(117, 107, 107, 0.82);
+            -webkit-box-shadow: 19px 13px 26px 1px rgba(117, 107, 107, 0.82);
+            -moz-box-shadow: 19px 13px 26px 1px rgba(117, 107, 107, 0.82);
+        }
+
+        img {
+            max-width: 100%;
+            align-items: center;
+            border-radius: 5%;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <header>
+        <h1>Alle</h1>
+
+
+        <nav class="container">
+            <button data-kategori="alle" class="valgt">Alle</button>
+            <button data-kategori="forretter">Forretter</button>
+            <button data-kategori="hovedretter">Hovedretter</button>
+            <button data-kategori="desserter">Desserter</button>
+            <button data-kategori="drikkevarer">Drikkevarer</button>
+            <button data-kategori="sideorders">Sideorders</button>
+        </nav>
+
+    </header>
+
+
+    <main></main>
+
+    <section id="liste"></section>
+
+    <template>
+        <article>
+            <img src="" alt="" class="billede">
+            <h2 class="navn"></h2>
+            <p class="kategori"></p>
+            <p class="kortBeskrivelse"></p>
+            <p class="LangBeskrivelse"></p>
+            <p class="oprindelse"></p>
+            <p class="pris"></p>
+        </article>
+    </template>
+
+
+
+
+
+
+    <script>
+        const header = document.querySelector("header h1");
+        const medieurl = "https://babushka-dd8a.restdb.io/media/";
+        const myHeaders = {
+
+            "x-apikey": "600ec2fb1346a1524ff12de4"
+        }
+        document.addEventListener("DOMContentLoaded", start)
+        let madretter;
+
+
+        // første funktion der kaldes efter DOM er loaded
+        function start() {
+
+            loadJSON();
+        }
+
+        async function loadJSON() {
+            const JSONData = await fetch("https://babushka-dd8a.restdb.io/rest/menu", {
+                headers: myHeaders
+            });
+            madretter = await JSONData.json();
+            console.log("Madretter", madretter);
+            visMadretter();
+        }
+
+        //funktion der viser madretter i liste view
+        function visMadretter() {
+
+            const dest = document.querySelector("#liste"); // container til articles med en person
+            const skabelon = document.querySelector("template").content; // select indhold af html skabelon (article)
+
+            madretter.forEach(madret => {
+
+                // loop igennem json (madretter)
+                const klon = skabelon.cloneNode(true);
+                klon.querySelector(".billede").src = medieurl + madret.billede;
+                klon.querySelector(".navn").textContent = madret.navn;
+                klon.querySelector(".kategori").textContent = madret.kategori;
+                klon.querySelector(".kortBeskrivelse").textContent = madret.kortbeskrivelse;
+                klon.querySelector(".LangBeskrivelse").textContent = madret.langbeskrivelse;
+                klon.querySelector(".oprindelse").textContent = madret.oprindelsesregion;
+                klon.querySelector(".pris").textContent = madret.pris;
+                dest.appendChild(klon);
+            })
+        }
+    </script>
+</body></html>
