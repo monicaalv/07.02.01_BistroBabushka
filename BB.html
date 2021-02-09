@@ -36,7 +36,7 @@
 <body>
 
     <header>
-        <h1>Alle</h1>
+        <h1></h1>
 
 
         <nav class="container">
@@ -92,17 +92,18 @@
         function start() {
             console.log("start");
             const filterKnapper = document.querySelectorAll("nav button");
-            filterKnapper.forEach(knap => knap.addEventListener("click", filtrerKategorier))
+            filterKnapper.forEach(knap => knap.addEventListener("click", filtrerKategorier));
             loadJSON();
         }
 
         function filtrerKategorier() {
-            filter = this.dataset.kategori;
+            filter = this.dataset.kategori; //sett variablen "filter" til verdien av data-kategori på den knap der er trykket på
 
             document.querySelector(".valgt").classList.remove(".valgt");
             this.classList.add(".valgt")
-            visMadretter();
-            header.textContent = this.textContent;
+            visMadretter(); //kand funksjonen visMadretter etter det nye filter er sat
+
+            /*  header.textContent = this.textContent;*/ //
         }
 
         async function loadJSON() {
@@ -120,9 +121,10 @@
 
             const dest = document.querySelector("#liste"); // container til articles med en person
             const skabelon = document.querySelector("template").content; // select indhold af html skabelon (article)
-
+            dest.textContent = ""; //rydd container inden ny loop
             madretter.forEach(madret => {
                 // loop igennem json (madretter)
+                //sjekk hvilken kategori de forskjellige retter har og sammenlign med aktuelt filter eller vis alle, hvis filteret har verdien "alle
                 if (filter == madret.kategori || filter == "alle") {
                     const klon = skabelon.cloneNode(true);
                     klon.querySelector(".billede").src = medieurl + madret.billede;
