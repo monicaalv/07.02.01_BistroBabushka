@@ -1,17 +1,14 @@
 <!DOCTYPE html>
-<html lang="da">
+<html lang="">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bistro Babushka</title>
 
-    <style>
-        /* body {
- background-color: skyblue;
- }*/
 
-        main {
+    <style>
+        #liste {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
         }
@@ -33,12 +30,30 @@
             border-radius: 5%;
         }
     </style>
+
 </head>
 
 <body>
 
+    <header>
+        <h1>Alle</h1>
 
-    <main></main>
+
+        <nav class="container">
+            <button data-kategori="alle" class="valgt">Alle</button>
+            <button data-kategori="forretter">Forretter</button>
+            <button data-kategori="hovedretter">Hovedretter</button>
+            <button data-kategori="desserter">Desserter</button>
+            <button data-kategori="drikkevarer">Drikkevarer</button>
+            <button data-kategori="sideorders">Sideorders</button>
+        </nav>
+
+    </header>
+
+
+
+
+    <section id="liste"></section>
 
     <template>
         <article>
@@ -58,38 +73,68 @@
 
 
     <script>
-        document.addEventListener("DOMContentLoaded", hentData)
-        console.log("Siden er loaded");
+        const header = document.querySelector("header h1");
 
-        const url = "https://babushka-dd8a.restdb.io/rest/menu";
         const medieurl = "https://babushka-dd8a.restdb.io/media/";
-        const options = {
-            headers: {
-                'x-apikey': " 600ec2fb1346a1524ff12de4"
-            }
-        };
+        const myHeaders = {
 
-        async function hentData() {
-            const respons = await fetch(url, options);
-            const json = await respons.json();
-            vis(json);
+            "x-apikey": "600ec2fb1346a1524ff12de4"
         }
 
-        const main = document.querySelector("main");
-        const template = document.querySelector("template").content;
+        document.addEventListener("DOMContentLoaded", start)
+        console.log("siden loaded");
 
-        function vis(json) {
-            console.log(json);
-            json.forEach(madret => {
-                const klon = template.cloneNode(true);
-                klon.querySelector(".billede").src = medieurl + madret.billede;
-                klon.querySelector(".navn").textContent = madret.navn;
-                klon.querySelector(".kategori").textContent = madret.kategori;
-                klon.querySelector(".kortBeskrivelse").textContent = madret.kortbeskrivelse;
-                klon.querySelector(".LangBeskrivelse").textContent = madret.langbeskrivelse;
-                klon.querySelector(".oprindelse").textContent = madret.oprindelsesregion;
-                klon.querySelector(".pris").textContent = madret.pris;
-                main.appendChild(klon);
+        let madretter;
+        let filter = "alle";
+
+
+        // første funktion der kaldes efter DOM er loaded
+        function start() {
+            console.log("start");
+            const filterKnapper = document.querySelectorAll("nav button");
+            filterKnapper.forEach(knap => knap.addEventListener("click", filtrerKategorier))
+            loadJSON();
+        }
+
+        function filtrerKategorier() {
+            filter = this.dataset.kategori;
+
+            document.querySelector(".valgt").classList.remove(".valgt");
+            this.classList.add(".valgt")
+            visMadretter();
+            header.textContent = this.textContent;
+        }
+
+        async function loadJSON() {
+            const JSONData = await fetch("https://babushka-dd8a.restdb.io/rest/menu", {
+                headers: myHeaders
+            });
+            madretter = await JSONData.json();
+            console.log("Madretter", madretter);
+            visMadretter();
+        }
+
+        //funktion der viser madretter i liste view
+        function visMadretter() {
+            console.log("vis madretter");
+
+            const dest = document.querySelector("#liste"); // container til articles med en person
+            const skabelon = document.querySelector("template").content; // select indhold af html skabelon (article)
+
+            madretter.forEach(madret => {
+                // loop igennem json (madretter)
+                if (filter == madret.kategori || filter == "alle") {
+                    const klon = skabelon.cloneNode(true);
+                    klon.querySelector(".billede").src = medieurl + madret.billede;
+                    klon.querySelector(".navn").textContent = madret.navn;
+                    klon.querySelector(".kategori").textContent = madret.kategori;
+                    klon.querySelector(".kortBeskrivelse").textContent = madret.kortbeskrivelse;
+                    klon.querySelector(".LangBeskrivelse").textContent = madret.langbeskrivelse;
+                    klon.querySelector(".oprindelse").textContent = madret.oprindelsesregion;
+                    klon.querySelector(".pris").textContent = madret.pris;
+                    dest.appendChild(klon);
+
+                }
 
             })
         }
