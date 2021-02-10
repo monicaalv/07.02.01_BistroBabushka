@@ -29,6 +29,15 @@
             align-items: center;
             border-radius: 5%;
         }
+
+        button:focus {
+            background-color: #ef7373;
+        }
+
+        button:hover {
+            background-color: #ef7373;
+        }
+
     </style>
 
 </head>
@@ -56,7 +65,7 @@
     <section id="liste"></section>
 
     <template>
-        <article>
+        <article class="madret">
             <img src="" alt="" class="billede">
             <h2 class="navn"></h2>
             <p class="kategori"></p>
@@ -99,11 +108,11 @@
         function filtrerKategorier() {
             filter = this.dataset.kategori; //sett variablen "filter" til verdien av data-kategori på den knap der er trykket på
 
-            document.querySelector(".valgt").classList.remove(".valgt");
-            this.classList.add(".valgt")
+            document.querySelector(".valgt").classList.remove(".valgt"); //fjern klassen valgt
+            this.classList.add(".valgt") //tilføy classen valgt til den knapp som er trykket på
             visMadretter(); //kand funksjonen visMadretter etter det nye filter er sat
 
-            /*  header.textContent = this.textContent;*/ //
+            /*  header.textContent = this.textContent;*/ //når det trykkes på knappen, sørger eventhandler-funksjonen for at h1-overskrifternes innhold oppdateres. (this henviser til knappen som har blitt trykket på)
         }
 
         async function loadJSON() {
@@ -131,14 +140,23 @@
                     klon.querySelector(".navn").textContent = madret.navn;
                     klon.querySelector(".kategori").textContent = madret.kategori;
                     klon.querySelector(".kortBeskrivelse").textContent = madret.kortbeskrivelse;
-                    klon.querySelector(".LangBeskrivelse").textContent = madret.langbeskrivelse;
+
                     klon.querySelector(".oprindelse").textContent = madret.oprindelsesregion;
                     klon.querySelector(".pris").textContent = madret.pris;
+                    //henter detlajer fra madret
+                    klon.querySelector(".madret").addEventListener("click", () => visDetaljer(madret));
                     dest.appendChild(klon);
 
                 }
 
             })
         }
+        //funkjsonen referer til 02_madret siden og tilføyer id
+        function visDetaljer(hvad) {
+            location.href = `02_madret.html?id=${hvad._id}`;
+        }
+
     </script>
-</body></html>
+</body>
+
+</html>
