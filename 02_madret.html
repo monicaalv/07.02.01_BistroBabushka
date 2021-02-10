@@ -4,22 +4,104 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lexend+Mega&family=Montserrat&display=swap" rel="stylesheet">
     <title>Singel View</title>
+
+
     <style>
+        img {
+            width: 100%;
+            border-radius: 5%;
+        }
+
+        body {
+            background-color: #b18787;
+        }
+
+        article {
+            /*border: 1px solid red;*/
+            border-radius: 20px;
+            padding: 8px;
+            margin: 1rem;
+            text-align: center;
+            box-shadow: 19px 13px 26px 1px rgba(117, 107, 107, 0.82);
+            -webkit-box-shadow: 19px 13px 26px 1px rgba(117, 107, 107, 0.82);
+            -moz-box-shadow: 19px 13px 26px 1px rgba(117, 107, 107, 0.82);
+        }
+
+
+
+
+        button {
+            padding: 5px;
+            /* border-radius: 10%;*/
+            border: none;
+            background-color: #b18787;
+            display: flex;
+            justify-content: space-between;
+            margin: 2px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            margin-left: 3rem;
+            margin-top: 5rem;
+            margin-bottom: 2rem;
+        }
+
+        button:hover {
+            background-color: coral;
+            border-radius: 7%;
+        }
+
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        p {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 100;
+        }
+
+        @media (min-width: 700px) {
+
+
+            article {
+                width: 55%;
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+
+                /*border: 1px solid red;*/
+                border-radius: 20px;
+                padding: 8px;
+                /*margin: 1rem;*/
+                text-align: center;
+                box-shadow: 19px 13px 26px 1px rgba(117, 107, 107, 0.82);
+                -webkit-box-shadow: 19px 13px 26px 1px rgba(117, 107, 107, 0.82);
+                -moz-box-shadow: 19px 13px 26px 1px rgba(117, 107, 107, 0.82);
+            }
+
+            button {
+                margin-left: 12rem;
+                font-size: 25px;
+            }
+        }
+
     </style>
 </head>
 
 <body>
+    <button>Tilbage</button>
 
     <article class="madret">
         <img src="" alt="" class="billede">
         <h2 class="navn"></h2>
-        <p class="kategori"></p>
+        <h3 class="kategori"></h3>
         <p class="kortBeskrivelse"></p>
         <p class="LangBeskrivelse"></p>
         <p class="oprindelse"></p>
         <p class="pris"></p>
-        <button>Tilbage</button>
+
     </article>
 
 
@@ -54,6 +136,7 @@
             document.querySelector(".navn").textContent = madret.navn;
             document.querySelector(".billede").src = medieurl + madret.billede;
             document.querySelector(".LangBeskrivelse").textContent = madret.langbeskrivelse;
+            document.querySelector(".pris").textContent = ("Pris: ") + madret.pris;
             document.querySelector("button").addEventListener("click", tilbageTilBB);
         }
         //tilbake til BB funksjon

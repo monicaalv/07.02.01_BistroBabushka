@@ -4,17 +4,56 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lexend+Mega&family=Montserrat&display=swap" rel="stylesheet">
     <title>Bistro Babushka</title>
 
 
     <style>
+        body {
+            background-color: #b18787;
+        }
+
+
+
+        h1 {
+
+            font-family: 'Montserrat', sans-serif;
+            font-size: 100px;
+            color: coral;
+            text-shadow: 1px 1px #7c6b6b;
+            /*   margin-left: 7rem;
+   margin-top: 10rem;*/
+            margin: 0;
+            padding-left: 6rem;
+            padding-top: 10rem;
+
+        }
+
+        .underoverskrift {
+            /*  display: flex;
+  justify-content: center;
+  align-items: flex-end;*/
+            font-family: 'Montserrat', sans-serif;
+            font-size: 30px;
+            color: black;
+            text-shadow: 1px 1px #7c6b6b;
+            /*  margin-left: 7rem;
+  margin-bottom: 7rem;*/
+            margin: 0;
+            padding-left: 37rem;
+            padding-bottom: 10rem;
+        }
+
+        header {}
+
         #liste {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
         }
 
         article {
-            border: 1px solid red;
+            /*border: 1px solid red;*/
             border-radius: 20px;
             padding: 8px;
             margin: 1rem;
@@ -30,13 +69,54 @@
             border-radius: 5%;
         }
 
+        .container {
+            margin-bottom: 3rem;
+
+        }
+
+        button {
+            padding: 5px;
+            /* border-radius: 10%;*/
+            border: none;
+            background-color: #b18787;
+            display: flex;
+            justify-content: space-between;
+            margin: 2px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+
+        }
+
         button:focus {
             background-color: #ef7373;
+            border-color: #ef7373;
         }
 
         button:hover {
-            background-color: #ef7373;
+            background-color: coral;
+            border-radius: 10%;
         }
+
+        /*//centrere knapper*/
+        .center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        p {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 100;
+        }
+
+        /*  template .madret p:nth-child(4) {
+  justify-content: space-between;
+  margin: 10px;
+  }*/
 
     </style>
 
@@ -44,17 +124,22 @@
 
 <body>
 
-    <header>
-        <h1></h1>
 
+    <header>
+        <div class="top">
+            <h1 class="overskrift">Bistro Babushka</h1>
+            <h2 class="underoverskrift">Russisk Cuisine</h2>
+        </div>
 
         <nav class="container">
-            <button data-kategori="alle" class="valgt">Alle</button>
-            <button data-kategori="forretter">Forretter</button>
-            <button data-kategori="hovedretter">Hovedretter</button>
-            <button data-kategori="desserter">Desserter</button>
-            <button data-kategori="drikkevarer">Drikkevarer</button>
-            <button data-kategori="sideorders">Sideorders</button>
+            <div class="center">
+                <button data-kategori="alle" class="valgt">Alle</button>
+                <button data-kategori="forretter">Forretter</button>
+                <button data-kategori="hovedretter">Hovedretter</button>
+                <button data-kategori="desserter">Desserter</button>
+                <button data-kategori="drikkevarer">Drikkevarer</button>
+                <button data-kategori="sideorders">Sideorders</button>
+            </div>
         </nav>
 
     </header>
@@ -68,7 +153,7 @@
         <article class="madret">
             <img src="" alt="" class="billede">
             <h2 class="navn"></h2>
-            <p class="kategori"></p>
+            <h3 class="kategori"></h3>
             <p class="kortBeskrivelse"></p>
             <p class="LangBeskrivelse"></p>
             <p class="oprindelse"></p>
@@ -138,11 +223,10 @@
                     const klon = skabelon.cloneNode(true);
                     klon.querySelector(".billede").src = medieurl + madret.billede;
                     klon.querySelector(".navn").textContent = madret.navn;
-                    klon.querySelector(".kategori").textContent = madret.kategori;
+                    /*   klon.querySelector(".kategori").textContent = madret.kategori;*/
                     klon.querySelector(".kortBeskrivelse").textContent = madret.kortbeskrivelse;
-
-                    klon.querySelector(".oprindelse").textContent = madret.oprindelsesregion;
-                    klon.querySelector(".pris").textContent = madret.pris;
+                    /*klon.querySelector(".oprindelse").textContent = madret.oprindelsesregion;*/
+                    klon.querySelector(".pris").textContent = ("Pris: ") + madret.pris;
                     //henter detlajer fra madret
                     klon.querySelector(".madret").addEventListener("click", () => visDetaljer(madret));
                     dest.appendChild(klon);
