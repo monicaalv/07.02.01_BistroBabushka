@@ -15,6 +15,16 @@
             border-radius: 5%;
         }
 
+        #bgImg {
+            background-image: url(graphic-4070337_1280.png);
+            min-height: 180px;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;
+            opacity: 0.2;
+        }
+
         body {
             background-color: #a1b2b9;
         }
@@ -46,7 +56,7 @@
             font-family: 'Montserrat', sans-serif;
             font-size: 20px;
             margin-left: 3rem;
-            margin-top: 5rem;
+            /* margin-top: 5rem;*/
             margin-bottom: 2rem;
         }
 
@@ -72,6 +82,9 @@
             padding-top: 1.5rem;
         }
 
+
+
+
         @media (min-width: 700px) {
 
 
@@ -94,10 +107,12 @@
                 font-size: 25px;
             }
         }
+
     </style>
 </head>
 
 <body>
+    <div id="bgImg"></div>
     <button>Tilbage</button>
 
     <article class="madret">
@@ -110,8 +125,9 @@
         <p class="pris"></p>
 
     </article>
-
-
+    <!--<div class="bakgrunnsbilde">
+    <img src="graphic-4070337_1280.png" alt="Babushka">
+</div>-->
 
 
     <script>
@@ -150,5 +166,8 @@
         function tilbageTilBB() {
             history.back();
         }
+
     </script>
-</body></html>
+</body>
+
+</html>
