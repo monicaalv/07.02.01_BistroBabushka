@@ -11,41 +11,32 @@
 
     <style>
         body {
-            background-color: #b18787;
+            background-color: #a1b2b9;
         }
 
 
 
         h1 {
-
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
             font-family: 'Montserrat', sans-serif;
             font-size: 100px;
-            color: coral;
+            color: #d02222;
             text-shadow: 1px 1px #7c6b6b;
-            /*   margin-left: 7rem;
-   margin-top: 10rem;*/
             margin: 0;
             padding-left: 6rem;
-            padding-top: 10rem;
+            padding-top: 5rem;
 
         }
 
-        .underoverskrift {
-            /*  display: flex;
-  justify-content: center;
-  align-items: flex-end;*/
-            font-family: 'Montserrat', sans-serif;
-            font-size: 30px;
-            color: black;
-            text-shadow: 1px 1px #7c6b6b;
-            /*  margin-left: 7rem;
-  margin-bottom: 7rem;*/
-            margin: 0;
-            padding-left: 37rem;
-            padding-bottom: 10rem;
-        }
 
-        header {}
+
+        .babushka {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+        }
 
         #liste {
             display: grid;
@@ -78,22 +69,24 @@
             padding: 5px;
             /* border-radius: 10%;*/
             border: none;
-            background-color: #b18787;
+            background-color: #a1b2b9;
             display: flex;
             justify-content: space-between;
-            margin: 2px;
+            margin: 10px;
             font-family: 'Montserrat', sans-serif;
             font-size: 20px;
+            margin-top: 6rem;
+
 
         }
 
         button:focus {
-            background-color: #ef7373;
-            border-color: #ef7373;
+            background-color: #a1b2b9;
+            border-color: #a1b2b9;
         }
 
         button:hover {
-            background-color: coral;
+            background-color: #a1b2b9;
             border-radius: 10%;
         }
 
@@ -113,22 +106,82 @@
             font-weight: 100;
         }
 
-        /*  template .madret p:nth-child(4) {
-  justify-content: space-between;
-  margin: 10px;
-  }*/
+        @media(max-width: 500px) {
 
+            h1 {
+                font-size: 40px;
+                padding-left: 0.5rem;
+            }
+
+            .underoverskrift {
+                display: flex;
+                justify-content: center align-items: flex-end;
+                font-family: 'Montserrat', sans-serif;
+                font-size: 15px;
+                padding-left: 1.3rem;
+                padding-bottom: 1rem;
+                color: #0b6993;
+            }
+
+
+
+            article {}
+        }
+
+        @media(min-width: 500px) {
+            h1 {
+                font-size: 70px;
+                padding-left: 0.5rem;
+            }
+
+            .underoverskrift {
+                display: flex;
+                justify-content: center;
+                align-items: flex-end;
+                font-family: 'Montserrat', sans-serif;
+                font-size: 20px;
+                color: #0b6993;
+                text-shadow: 1px 1px #7c6b6b;
+                margin: 0;
+                padding-left: 8rem;
+                /*  padding-bottom: 10rem;*/
+            }
+        }
+
+        @media(min-width: 800px) {
+            h1 {
+                font-size: 100px;
+                padding-left: 0.5rem;
+            }
+
+            .underoverskrift {
+                display: flex;
+                justify-content: center;
+                align-items: flex-end;
+                font-family: 'Montserrat', sans-serif;
+                font-size: 30px;
+                color: #0b6993;
+                text-shadow: 1px 1px #7c6b6b;
+                margin: 0;
+                padding-left: 35rem;
+                /*  padding-bottom: 10rem;*/
+            }
+
+
+        }
     </style>
 
 </head>
 
 <body>
 
-
     <header>
         <div class="top">
             <h1 class="overskrift">Bistro Babushka</h1>
             <h2 class="underoverskrift">Russisk Cuisine</h2>
+        </div>
+        <div class="babushka">
+            <img src="graphic-4070337_1280.png" alt="babushka">
         </div>
 
         <nav class="container">
@@ -239,8 +292,5 @@
         function visDetaljer(hvad) {
             location.href = `02_madret.html?id=${hvad._id}`;
         }
-
     </script>
-</body>
-
-</html>
+</body></html>
